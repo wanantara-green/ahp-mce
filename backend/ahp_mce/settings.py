@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -38,7 +39,7 @@ ROOT_URLCONF = "ahp_mce.urls"
 
 TEMPLATES = [{
     "BACKEND": "django.template.backends.django.DjangoTemplates",
-    "DIRS": [],
+    "DIRS": [BASE_DIR / "templates"],
     "APP_DIRS": True,
     "OPTIONS": {"context_processors": [
         "django.template.context_processors.request",
@@ -63,6 +64,11 @@ DATABASES = {
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
     "DEFAULT_PARSER_CLASSES": ["rest_framework.parsers.JSONParser"],
+    # API form pakar bersifat publik & tanpa autentikasi. Kosongkan kelas
+    # autentikasi agar SessionAuthentication tidak memaksa token CSRF saat
+    # pengguna kebetulan punya sesi admin aktif (penyebab "CSRF Failed").
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
 }
 
 # CORS: frontend statis dilayani nginx pada origin terpisah
@@ -78,8 +84,12 @@ TIME_ZONE = "Asia/Makassar"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = "static/"
+STATIC_URL = "/django-static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"},
+}
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # API key Anthropic untuk lapisan AI (opsional; narasi nonaktif jika kosong)
@@ -89,7 +99,10 @@ JAZZMIN_SETTINGS = {
     "site_title": "AHP-MCE Admin",
     "site_header": "AHP-MCE FOLUR Luwu",
     "site_brand": "AHP-MCE",
-    "site_logo": None,
+    "site_logo": "admin_extra/favicon.svg",
+    "site_logo_classes": "img-circle",
+    "login_logo": "admin_extra/favicon.svg",
+    "site_icon": "admin_extra/favicon.svg",
     "welcome_sign": "Selamat datang di panel administrasi AHP-MCE",
     "copyright": "PT. Mareto Agri Persada / UNDP FOLUR Indonesia",
     "search_model": ["kobo_mce.ExpertResponse"],
@@ -110,7 +123,7 @@ JAZZMIN_SETTINGS = {
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-circle",
     "related_modal_active": True,
-    "custom_css": None,
+    "custom_css": "admin_extra/admin_extra.css",
     "custom_js": None,
     "use_google_fonts_cdn": True,
     "show_ui_builder": False,
@@ -123,15 +136,15 @@ JAZZMIN_UI_TWEAKS = {
     "footer_small_text": False,
     "body_small_text": False,
     "brand_small_text": False,
-    "brand_colour": "navbar-success",
-    "accent": "accent-teal",
-    "navbar": "navbar-dark",
+    "brand_colour": False,
+    "accent": "accent-primary",
+    "navbar": "navbar-white navbar-light",
     "no_navbar_border": False,
     "navbar_fixed": True,
     "layout_boxed": False,
     "footer_fixed": False,
     "sidebar_fixed": True,
-    "sidebar": "sidebar-dark-teal",
+    "sidebar": "sidebar-dark-primary",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": True,

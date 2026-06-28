@@ -29,7 +29,8 @@ CONSTRUCT_LABELS = {
     "K5": "Faktor Sosial-Ekonomi",
 }
 INDICATORS = {
-    "K1": ["Kesesuaian Kakao", "Kesesuaian Padi"],
+    "K1": ["Kesesuaian Kakao", "Kesesuaian Padi",
+           "Kesesuaian Lainnya (Jagung, Sagu, Cengkeh)"],
     "K2": ["Daya Dukung Lahan", "Daya Dukung Air", "Kinerja Jasa Ekosistem"],
     "K3": ["Risiko Banjir/Longsor", "Risiko Kekeringan", "Risiko Hidrometeorologi"],
     "K4": ["Kawasan ABKT", "Area Preservasi", "Fungsi Hidrologi"],

@@ -24,7 +24,8 @@ const BLOCKS = {
   k1: {
     title: "Indikator — Kesesuaian Lahan",
     desc: "Bobot tiap komoditas dalam kriteria kesesuaian lahan.",
-    elements: ["Kesesuaian Kakao", "Kesesuaian Padi"],
+    elements: ["Kesesuaian Kakao", "Kesesuaian Padi",
+               "Kesesuaian Lainnya (Jagung, Sagu, Cengkeh)"],
   },
   k2: {
     title: "Indikator — Daya Dukung Lingkungan",

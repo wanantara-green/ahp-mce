@@ -17,7 +17,7 @@ from .weighting import ahp
 # Pola nama kolom Kobo
 _COL_RE = re.compile(r"^(konstruk|k[1-5])_(\d+)_(\d+)$")
 
-BLOCK_SIZE = {"konstruk": 5, "k1": 2, "k2": 3, "k3": 3, "k4": 3, "k5": 4}
+BLOCK_SIZE = {"konstruk": 5, "k1": 3, "k2": 3, "k3": 3, "k4": 3, "k5": 4}
 INDICATOR_BLOCKS = ["k1", "k2", "k3", "k4", "k5"]
 
 

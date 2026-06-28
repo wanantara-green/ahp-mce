@@ -2,7 +2,7 @@
 models.py — Model Django untuk menyimpan respons pairwise AHP dari KoboToolbox.
 
 Skema penyimpanan mengikuti konvensi Tahap 1:
-    - 1 ExpertResponse = 1 ahli mengisi seluruh instrumen (26 perbandingan)
+    - 1 ExpertResponse = 1 ahli mengisi seluruh instrumen (28 perbandingan)
     - PairwiseValue menyimpan tiap sel: blok matriks + indeks (i,j) + nilai bertanda
 Nilai bertanda: >0 elemen-i lebih penting, <0 elemen-j lebih penting (lihat ahp.py).
 """
@@ -21,15 +21,16 @@ class ExpertTypology(models.TextChoices):
 class MatrixBlock(models.TextChoices):
     """Blok matriks dalam hierarki AHP."""
     KONSTRUK = "konstruk", "Antar Konstruk (5x5)"
-    K1 = "k1", "Indikator Kesesuaian Lahan (2x2)"
+    K1 = "k1", "Indikator Kesesuaian Lahan (3x3)"
     K2 = "k2", "Indikator Daya Dukung Lingkungan (3x3)"
     K3 = "k3", "Indikator Risiko Iklim & Bencana (3x3)"
     K4 = "k4", "Indikator Nilai Konservasi (3x3)"
     K5 = "k5", "Indikator Faktor Sosial-Ekonomi (4x4)"
 
 
-# Ukuran tiap blok matriks (untuk validasi & rekonstruksi)
-BLOCK_SIZE = {"konstruk": 5, "k1": 2, "k2": 3, "k3": 3, "k4": 3, "k5": 4}
+# Ukuran tiap blok matriks. Sumber-tunggal kebenaran ada di parser.BLOCK_SIZE;
+# definisi ini disinkronkan untuk referensi & dihindari sebagai sumber impor.
+BLOCK_SIZE = {"konstruk": 5, "k1": 3, "k2": 3, "k3": 3, "k4": 3, "k5": 4}
 
 
 class ExpertResponse(models.Model):
