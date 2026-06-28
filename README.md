@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-# ahp-ai
 =======
 # kobo_mce — Modul Pembobotan AHP untuk Zonasi MCE FOLUR Luwu
 
