@@ -11,6 +11,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "0") == "1"
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,backend").split(",")
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -83,3 +84,67 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # API key Anthropic untuk lapisan AI (opsional; narasi nonaktif jika kosong)
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+
+JAZZMIN_SETTINGS = {
+    "site_title": "AHP-MCE Admin",
+    "site_header": "AHP-MCE FOLUR Luwu",
+    "site_brand": "AHP-MCE",
+    "site_logo": None,
+    "welcome_sign": "Selamat datang di panel administrasi AHP-MCE",
+    "copyright": "PT. Mareto Agri Persada / UNDP FOLUR Indonesia",
+    "search_model": ["kobo_mce.ExpertResponse"],
+    "topmenu_links": [
+        {"name": "Dashboard", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Hasil Bobot", "url": "http://localhost:8080/hasil.html", "new_window": True},
+        {"name": "Form Pakar", "url": "http://localhost:8080/", "new_window": True},
+    ],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "kobo_mce.ExpertResponse": "fas fa-clipboard-list",
+        "kobo_mce.PairwiseValue": "fas fa-table",
+    },
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    "related_modal_active": True,
+    "custom_css": None,
+    "custom_js": None,
+    "use_google_fonts_cdn": True,
+    "show_ui_builder": False,
+    "changeform_format": "horizontal_tabs",
+    "language_chooser": False,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-success",
+    "accent": "accent-teal",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-teal",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "default",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+}
